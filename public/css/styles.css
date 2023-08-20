@@ -193,6 +193,43 @@ select {
 .boton-eliminar:focus {
   outline: none;
 }
+
+.field {
+  margin-bottom: 10px;
+}
+
+.field label {
+  display: block;
+  font-size: 12px;
+  color: #777;
+}
+
+.field input {
+  display: block;
+  min-width: 250px;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+input[type="submit"] {
+  display: block;
+  padding: 6px 30px;
+  font-size: 14px;
+
+  color: #fff;
+  border: none
+}
+
+@media (max-width: 768px) {
+  #producto-contenedor{
+    display: block;
+
+  .card{
+    max-width: 50%;
+    margin-left: 25%;
+  }
+  }
+}
 /*$turquesa: #6DDAF2;
 $azul: #3F7E8C;
 $verde-medio: #A4D955;
