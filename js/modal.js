@@ -39,7 +39,6 @@ document.getElementById('form')
         emailjs.sendForm(serviceID, templateID, this)
             .then(() => {
                 btn.value = 'Send Email';
-                alert('Sent!');
             }, (err) => {
                 btn.value = 'Send Email';
                 alert(JSON.stringify(err));
@@ -68,13 +67,6 @@ finalizar.addEventListener('click', () => {
 const emailInput = document.getElementById("reply_to");
 const submitButton = document.getElementById("button");
 
-emailInput.addEventListener("keypress", validarCarrito);
-emailInput.addEventListener("focus", validarCarrito);
-emailInput.addEventListener("change", validarCarrito);
-emailInput.addEventListener("input", validarCarrito);
-emailInput.addEventListener("submit", validarCarrito);
-
-
 const validarCarrito = () => {
     const emailValue = emailInput.value.trim();
     const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
@@ -84,5 +76,14 @@ const validarCarrito = () => {
         submitButton.setAttribute("disabled", "disabled");
     }
 }
+
+emailInput.addEventListener("keypress", validarCarrito);
+emailInput.addEventListener("focus", validarCarrito);
+emailInput.addEventListener("change", validarCarrito);
+emailInput.addEventListener("input", validarCarrito);
+emailInput.addEventListener("submit", validarCarrito);
+
+
+
 
 

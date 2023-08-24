@@ -1,6 +1,13 @@
-let carrito = [];
+let carrito = localStorage.getItem("carrito") !== null ? JSON.parse(localStorage.getItem("carrito")) : [];
 
 const productoContenedor = document.getElementById("producto-contenedor");
+
+document.addEventListener("DOMContentLoaded", function() {
+    carrito.forEach(function (element){
+        pintarProductoCarrito(element)
+    });
+    calcularTotalcito(carrito);
+});
 
 
 const handleClick = (event) => {
@@ -16,17 +23,25 @@ productoContenedor.addEventListener('click', (e) => {
 
 const validarProductoEnCarrito = (id) => {
     const estaRepetido = carrito.some(producto => producto.id == id)
+    let producto = productos.find(producto => producto.id == id)
+
+    let cantidad = document.getElementById(`cantidad${producto.id}`)
 
     if (!estaRepetido) {
-        const producto = productos.find(producto => producto.id == id)
         carrito.push(producto)
         pintarProductoCarrito(producto)
     } else {
-        const producto = carrito.find(producto => producto.id == id)
-        const cantidad = document.getElementById(`cantidad${producto.id}`)
+        if (cantidad === null)
+        {
+            pintarProductoCarrito(producto)
+            cantidad = document.getElementById(`cantidad${producto.id}`)
+        }
+        producto = carrito.find(producto => producto.id == id)
         producto.cantidad++
+        console.log(cantidad, producto);
         cantidad.innerText = `Cantidad: ${producto.cantidad}`
     }
+    localStorage.setItem("carrito", JSON.stringify(carrito))
 }
 
 const pintarProductoCarrito = (producto) => {
@@ -61,7 +76,9 @@ const sacarProductilloModal = (idProducto) => {
     const element = document.getElementById('divp-' + idProducto);
     element.parentNode.removeChild(element);
     carrito = carrito.filter(obj => obj.id.toString() !== idProducto);
+
     calcularTotalcito(carrito);
+    localStorage.setItem("carrito", JSON.stringify(carrito));
     validarCarrito();
     Toastify({
         text: "Producto Eliminado :(",
